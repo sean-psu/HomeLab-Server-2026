@@ -1,0 +1,132 @@
+config-file-header
+<HOSTNAME>
+v1.4.1.3 / R800_NIK_1_4_194_194
+CLI v1.0
+set system mode switch 
+
+file SSD indicator encrypted
+@
+ssd-control-start 
+ssd config 
+ssd file passphrase control unrestricted 
+no ssd file integrity control 
+ssd-control-end <REDACTED_HASH> 
+!
+vlan database
+vlan 10,100,999 
+exit
+voice vlan oui-table add 0001e3 Siemens_AG_phone________
+voice vlan oui-table add 00036b Cisco_phone_____________
+voice vlan oui-table add 00096e Avaya___________________
+voice vlan oui-table add 000fe2 H3C_Aolynk______________
+voice vlan oui-table add 0060b9 Philips_and_NEC_AG_phone
+voice vlan oui-table add 00d01e Pingtel_phone___________
+voice vlan oui-table add 00e075 Polycom/Veritel_phone___
+voice vlan oui-table add 00e0bb 3Com_phone______________
+port-channel load-balance src-dst-mac-ip
+hostname <HOSTNAME>
+username <ADMIN_USER> password encrypted <ENCRYPTED_PASSWORD_HASH> privilege 15 
+!
+interface vlan 10
+ name Virtual 
+!
+interface vlan 100
+ name ServerHardware 
+!
+interface vlan 999
+ name Management 
+ ip address <MANAGEMENT_IP> <SUBNET_MASK> 
+ no ip address dhcp 
+!
+interface gigabitethernet1
+ channel-group 1 mode auto 
+!
+interface gigabitethernet2
+ switchport mode access 
+ switchport access vlan 999 
+!
+interface gigabitethernet3
+ channel-group 2 mode auto 
+!
+interface gigabitethernet4
+ channel-group 3 mode auto 
+!
+interface gigabitethernet5
+ switchport mode access 
+ switchport access vlan 999 
+!
+interface gigabitethernet6
+ channel-group 4 mode auto 
+!
+interface gigabitethernet7
+ switchport trunk allowed vlan add 10,100 
+!
+interface gigabitethernet8
+ switchport mode access 
+ switchport access vlan 100 
+!
+interface gigabitethernet13
+ channel-group 1 mode auto 
+!
+interface gigabitethernet14
+ switchport mode access 
+ switchport access vlan 999 
+!
+interface gigabitethernet15
+ channel-group 2 mode auto 
+!
+interface gigabitethernet16
+ channel-group 3 mode auto 
+!
+interface gigabitethernet17
+ switchport mode access 
+ switchport access vlan 999 
+!
+interface gigabitethernet18
+ channel-group 4 mode auto 
+!
+interface gigabitethernet19
+ switchport trunk allowed vlan add 10,100,999 
+!
+interface gigabitethernet23
+ switchport trunk allowed vlan add 10,100,999 
+!
+interface gigabitethernet24
+ switchport mode access 
+ switchport access vlan 100 
+!
+interface gigabitethernet25
+ switchport mode access 
+ switchport access vlan 999 
+!
+interface gigabitethernet26
+ switchport mode access 
+ switchport access vlan 10 
+!
+interface gigabitethernet27
+ channel-group 8 mode auto 
+!
+interface gigabitethernet28
+ channel-group 8 mode auto 
+!
+interface Port-channel1
+ description Server0
+ switchport trunk allowed vlan add 10,100,999 
+!
+interface Port-channel2
+ description Server1
+ switchport trunk allowed vlan add 10,100,999 
+!
+interface Port-channel3
+ description Server2
+ switchport trunk allowed vlan add 10,100,999 
+!
+interface Port-channel4
+ description Server3
+ switchport trunk allowed vlan add 10,100,999 
+!
+interface Port-channel8
+ description "Router :)"
+ switchport trunk allowed vlan add 10,100,999 
+!
+exit
