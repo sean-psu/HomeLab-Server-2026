@@ -2,7 +2,7 @@
 
 This repo has the two switch configs I wrote for a homelab server project we built. The idea was to set up something close to a small corporate network at home while staying separate from the main network in the house.
 
-## The project
+## The Project
 
 The core of the network is a Cisco Enterprise ISR router and a Cisco Catalyst PoE+ managed switch. Residential traffic is isolated from our hypervisor environments with VLANs, and the edge devices run a double NAT so the homelab sits behind its own gateway, separate from the main home internet.
 
